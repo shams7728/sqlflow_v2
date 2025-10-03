@@ -1,0 +1,280 @@
+{
+    "id": "subqueries",
+    "title": "Subqueries (Inner Queries)",
+    "category": "Subqueries & Set Ops",
+    "difficulty": "Intermediate",
+    "estimatedTime": "22 min",
+    "starterQuery": "SELECT name, salary\nFROM employees\nWHERE salary > (SELECT AVG(salary) FROM employees);",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is a Subquery?\nA subquery, also known as an inner query or nested query, is a query that is nested inside another SQL query. The subquery is always executed first, and its result is used by the outer query."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Where can Subqueries be used?\nSubqueries are most commonly used within the `WHERE` clause to filter data. They can also be used in the `FROM` clause (as a temporary table), the `SELECT` clause (as a scalar value), or with `IN`, `NOT IN`, `ANY`, and `ALL` operators."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. What are the types of Subqueries?\nSubqueries can be categorized based on the number of rows they return. A 'single-row subquery' returns only one row and can be used with standard comparison operators (=, >, <). A 'multiple-row subquery' returns more than one row and must be used with operators like `IN` or `NOT IN`."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. How does it work?\nThe database executes the innermost query first. The result of this inner query is then passed to the outer query, which uses it to determine the final result set. It's a powerful way to break down a complex problem into smaller, logical steps."
+        },
+        {
+            "type": "code",
+            "text": "-- Find all employees who work in the 'Sales' department\nSELECT name\nFROM employees\nWHERE department_id = (SELECT id FROM departments WHERE name = 'Sales');"
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "employees",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT",
+                        "constraints": "NOT NULL"
+                    },
+                    {
+                        "name": "salary",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "department_id",
+                        "type": "INTEGER"
+                    }
+                ]
+            },
+            {
+                "name": "departments",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT",
+                        "constraints": "NOT NULL"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "employees": [
+            {
+                "id": 1,
+                "name": "Alice",
+                "salary": 90000,
+                "department_id": 1
+            },
+            {
+                "id": 2,
+                "name": "Bob",
+                "salary": 80000,
+                "department_id": 1
+            },
+            {
+                "id": 3,
+                "name": "Charlie",
+                "salary": 110000,
+                "department_id": 2
+            },
+            {
+                "id": 4,
+                "name": "Diana",
+                "salary": 75000,
+                "department_id": 3
+            },
+            {
+                "id": 5,
+                "name": "Eve",
+                "salary": 95000,
+                "department_id": 2
+            }
+        ],
+        "departments": [
+            {
+                "id": 1,
+                "name": "Engineering"
+            },
+            {
+                "id": 2,
+                "name": "Sales"
+            },
+            {
+                "id": 3,
+                "name": "HR"
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Subqueries (Inner Queries) Query",
+            "description": "Practice the fundamental concepts of Subqueries (Inner Queries).",
+            "starterCode": "-- Practice Subqueries (Inner Queries)\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Subqueries (Inner Queries) lesson",
+            "hint": "Review the Subqueries (Inner Queries) syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Subqueries (Inner Queries) functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Subqueries (Inner Queries)",
+            "description": "Apply Subqueries (Inner Queries) with additional complexity.",
+            "starterCode": "-- Intermediate Subqueries (Inner Queries) practice\n-- Your code here",
+            "solution": "-- More complex Subqueries (Inner Queries) solution",
+            "hint": "Combine Subqueries (Inner Queries) with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Subqueries (Inner Queries)."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Subqueries (Inner Queries)",
+            "description": "Master advanced Subqueries (Inner Queries) techniques.",
+            "starterCode": "-- Advanced Subqueries (Inner Queries) practice\n-- Your advanced query here",
+            "solution": "-- Advanced Subqueries (Inner Queries) solution",
+            "hint": "Think about edge cases and optimization for Subqueries (Inner Queries).",
+            "expectedOutput": "Advanced Subqueries (Inner Queries) results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Subqueries (Inner Queries)",
+            "description": "Apply Subqueries (Inner Queries) to solve a realistic business problem.",
+            "starterCode": "-- Real-world Subqueries (Inner Queries) scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Subqueries (Inner Queries) solution",
+            "hint": "Consider how Subqueries (Inner Queries) would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "quiz": [
+        {
+            "id": "subqueries_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Subqueries (Inner Queries)?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Subqueries (Inner Queries) functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Subqueries (Inner Queries) functionality",
+            "explanation": "Subqueries (Inner Queries) is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "subqueries_q2",
+            "type": "truefalse",
+            "question": "Subqueries (Inner Queries) can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Subqueries (Inner Queries) can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "subqueries_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Subqueries (Inner Queries)?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Subqueries (Inner Queries), you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "subqueries_q4",
+            "type": "truefalse",
+            "question": "Subqueries (Inner Queries) is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "subqueries_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Subqueries (Inner Queries)?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "subqueries_q6",
+            "type": "mcq",
+            "question": "When learning Subqueries (Inner Queries), what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "subqueries_q7",
+            "type": "truefalse",
+            "question": "Understanding Subqueries (Inner Queries) is important for database professionals.",
+            "answer": true,
+            "explanation": "Subqueries (Inner Queries) is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "subqueries_q8",
+            "type": "mcq",
+            "question": "What should you do before using Subqueries (Inner Queries) in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ],
+    "challenges": [
+        {
+            "id": "subquery_ch1",
+            "title": "Find the Highest-Paid Employee(s)",
+            "steps": [
+                {
+                    "stepId": "subquery_ch1_step1",
+                    "description": "First, write a subquery to find the maximum salary from the `employees` table.",
+                    "solution": "SELECT MAX(salary) FROM employees;"
+                },
+                {
+                    "stepId": "subquery_ch1_step2",
+                    "description": "Now, use that subquery in a `WHERE` clause to find the name(s) of the employee(s) who have that maximum salary.",
+                    "solution": "SELECT name FROM employees WHERE salary = (SELECT MAX(salary) FROM employees);"
+                }
+            ]
+        },
+        {
+            "id": "subquery_ch2",
+            "title": "List Departments With Employees",
+            "steps": [
+                {
+                    "stepId": "subquery_ch2_step1",
+                    "description": "Write a subquery that returns a distinct list of all `department_id` values present in the `employees` table.",
+                    "solution": "SELECT DISTINCT department_id FROM employees;"
+                },
+                {
+                    "stepId": "subquery_ch2_step2",
+                    "description": "Use this subquery with the `IN` operator to select the names of the departments from the `departments` table that are in the list.",
+                    "solution": "SELECT name FROM departments WHERE id IN (SELECT DISTINCT department_id FROM employees);"
+                }
+            ]
+        }
+    ]
+}

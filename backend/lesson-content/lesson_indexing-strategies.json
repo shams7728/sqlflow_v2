@@ -1,0 +1,195 @@
+{
+    "id": "indexing-strategies",
+    "title": "Indexing Strategies",
+    "category": "Database Design & Perf",
+    "difficulty": "Advanced",
+    "estimatedTime": "30 min",
+    "starterQuery": "/* This is a conceptual lesson on advanced indexing strategies. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is an Indexing Strategy?\nAn indexing strategy is the plan for how you create and manage indexes to maximize query performance. It's not just about creating indexes, but about creating the *right* indexes for your specific workload, balancing the speed of reads (`SELECT`) against the cost of writes (`INSERT`, `UPDATE`, `DELETE`)."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. What is a Clustered vs. Non-Clustered Index?\nThis is a fundamental concept. A table can have only one **clustered index**, which determines the physical order of data in the table. A **non-clustered index** has a separate structure that points back to the data rows, like a book's index. You can have many non-clustered indexes."
+        },
+        {
+            "type": "table",
+            "columns": [
+                "Aspect",
+                "Clustered Index",
+                "Non-Clustered Index"
+            ],
+            "rows": [
+                [
+                    "Number per Table",
+                    "Only one",
+                    "Many"
+                ],
+                [
+                    "Physical Order",
+                    "Sorts the data physically on disk",
+                    "Does not affect physical data order"
+                ],
+                [
+                    "Structure",
+                    "The index IS the table data",
+                    "A separate structure with pointers to the data"
+                ],
+                [
+                    "Performance",
+                    "Very fast for range scans",
+                    "Fast for point lookups"
+                ]
+            ]
+        },
+        {
+            "type": "paragraph",
+            "text": "3. What is a Composite Index?\nA composite (or multi-column) index is an index on two or more columns. The order of columns is critical. An index on `(last_name, first_name)` is very efficient for queries that filter by `last_name` and `first_name`, or just by `last_name`. However, it is not efficient for queries that only filter by `first_name`."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. What is a Covering Index?\nA covering index is a special type of composite index that includes all the columns requested in a query's `SELECT`, `JOIN`, and `WHERE` clauses. When a query can get all the data it needs directly from the index itself, it doesn't have to touch the main table data at all, making it extremely fast."
+        },
+        {
+            "type": "paragraph",
+            "text": "5. What is Index Selectivity?\nSelectivity refers to how many unique values a column has relative to the number of rows. A column with high selectivity (like a `user_id` or `email`) is an excellent candidate for an index. A column with low selectivity (like a `gender` column with only a few possible values) is a poor candidate for an index."
+        },
+        {
+            "type": "note",
+            "text": "General Strategy: Start by indexing your primary keys (which is automatic) and foreign keys. Then, analyze your most frequent and slowest queries and add indexes to the columns used in their `WHERE` and `JOIN` clauses."
+        }
+    ],
+    "schema": {
+        "tables": []
+    },
+    "sample_data": {},
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Indexing Strategies Query",
+            "description": "Practice the fundamental concepts of Indexing Strategies.",
+            "starterCode": "-- Practice Indexing Strategies\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Indexing Strategies lesson",
+            "hint": "Review the Indexing Strategies syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Indexing Strategies functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Indexing Strategies",
+            "description": "Apply Indexing Strategies with additional complexity.",
+            "starterCode": "-- Intermediate Indexing Strategies practice\n-- Your code here",
+            "solution": "-- More complex Indexing Strategies solution",
+            "hint": "Combine Indexing Strategies with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Indexing Strategies."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Indexing Strategies",
+            "description": "Master advanced Indexing Strategies techniques.",
+            "starterCode": "-- Advanced Indexing Strategies practice\n-- Your advanced query here",
+            "solution": "-- Advanced Indexing Strategies solution",
+            "hint": "Think about edge cases and optimization for Indexing Strategies.",
+            "expectedOutput": "Advanced Indexing Strategies results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Indexing Strategies",
+            "description": "Apply Indexing Strategies to solve a realistic business problem.",
+            "starterCode": "-- Real-world Indexing Strategies scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Indexing Strategies solution",
+            "hint": "Consider how Indexing Strategies would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "indexing-strategies_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Indexing Strategies?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Indexing Strategies functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Indexing Strategies functionality",
+            "explanation": "Indexing Strategies is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "indexing-strategies_q2",
+            "type": "truefalse",
+            "question": "Indexing Strategies can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Indexing Strategies can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "indexing-strategies_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Indexing Strategies?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Indexing Strategies, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "indexing-strategies_q4",
+            "type": "truefalse",
+            "question": "Indexing Strategies is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "indexing-strategies_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Indexing Strategies?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "indexing-strategies_q6",
+            "type": "mcq",
+            "question": "When learning Indexing Strategies, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "indexing-strategies_q7",
+            "type": "truefalse",
+            "question": "Understanding Indexing Strategies is important for database professionals.",
+            "answer": true,
+            "explanation": "Indexing Strategies is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "indexing-strategies_q8",
+            "type": "mcq",
+            "question": "What should you do before using Indexing Strategies in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

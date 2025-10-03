@@ -1,0 +1,192 @@
+{
+    "id": "normalization-denormalization",
+    "title": "Normalization vs. Denormalization",
+    "category": "Database Design & Perf",
+    "difficulty": "Advanced",
+    "estimatedTime": "25 min",
+    "starterQuery": "/* This is a conceptual lesson on database design principles. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is Normalization?\nNormalization is the process of organizing columns and tables in a relational database to minimize data redundancy. The goal is to divide larger tables into smaller, well-structured tables and define relationships between them. This reduces the risk of data anomalies (like update, insertion, and deletion anomalies)."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. What is Denormalization?\nDenormalization is the opposite process. It involves intentionally adding redundant data to one or more tables. This is done to improve query performance by avoiding the need for complex joins between tables, which can be slow."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. What is the Trade-Off?\nThe core trade-off is between data integrity and query performance. Normalization prioritizes data integrity and reduces redundancy, but it can lead to slower queries that require many joins. Denormalization prioritizes fast query performance (fewer joins) at the cost of data redundancy and a higher risk of data anomalies."
+        },
+        {
+            "type": "table",
+            "columns": [
+                "Aspect",
+                "Normalization",
+                "Denormalization"
+            ],
+            "rows": [
+                [
+                    "Primary Goal",
+                    "Minimize data redundancy",
+                    "Improve read performance"
+                ],
+                [
+                    "Data Integrity",
+                    "High (prevents anomalies)",
+                    "Lower (risk of inconsistent data)"
+                ],
+                [
+                    "Write Performance",
+                    "Faster (updates are smaller)",
+                    "Slower (redundant data must be updated)"
+                ],
+                [
+                    "Read Performance",
+                    "Slower (requires more joins)",
+                    "Faster (fewer joins needed)"
+                ],
+                [
+                    "Best Use Case",
+                    "Transactional Systems (OLTP)",
+                    "Reporting & Analytics (OLAP, Data Warehouses)"
+                ]
+            ]
+        },
+        {
+            "type": "note",
+            "text": "In modern database design, it's common to start with a highly normalized model for your main application (OLTP) and then create a separate, denormalized database or data warehouse for reporting and analytics (OLAP)."
+        }
+    ],
+    "schema": {
+        "tables": []
+    },
+    "sample_data": {},
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Normalization vs. Denormalization Query",
+            "description": "Practice the fundamental concepts of Normalization vs. Denormalization.",
+            "starterCode": "-- Practice Normalization vs. Denormalization\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Normalization vs. Denormalization lesson",
+            "hint": "Review the Normalization vs. Denormalization syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Normalization vs. Denormalization functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Normalization vs. Denormalization",
+            "description": "Apply Normalization vs. Denormalization with additional complexity.",
+            "starterCode": "-- Intermediate Normalization vs. Denormalization practice\n-- Your code here",
+            "solution": "-- More complex Normalization vs. Denormalization solution",
+            "hint": "Combine Normalization vs. Denormalization with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Normalization vs. Denormalization."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Normalization vs. Denormalization",
+            "description": "Master advanced Normalization vs. Denormalization techniques.",
+            "starterCode": "-- Advanced Normalization vs. Denormalization practice\n-- Your advanced query here",
+            "solution": "-- Advanced Normalization vs. Denormalization solution",
+            "hint": "Think about edge cases and optimization for Normalization vs. Denormalization.",
+            "expectedOutput": "Advanced Normalization vs. Denormalization results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Normalization vs. Denormalization",
+            "description": "Apply Normalization vs. Denormalization to solve a realistic business problem.",
+            "starterCode": "-- Real-world Normalization vs. Denormalization scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Normalization vs. Denormalization solution",
+            "hint": "Consider how Normalization vs. Denormalization would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "normalization-denormalization_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Normalization vs. Denormalization?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Normalization vs. Denormalization functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Normalization vs. Denormalization functionality",
+            "explanation": "Normalization vs. Denormalization is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "normalization-denormalization_q2",
+            "type": "truefalse",
+            "question": "Normalization vs. Denormalization can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Normalization vs. Denormalization can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "normalization-denormalization_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Normalization vs. Denormalization?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Normalization vs. Denormalization, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "normalization-denormalization_q4",
+            "type": "truefalse",
+            "question": "Normalization vs. Denormalization is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "normalization-denormalization_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Normalization vs. Denormalization?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "normalization-denormalization_q6",
+            "type": "mcq",
+            "question": "When learning Normalization vs. Denormalization, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "normalization-denormalization_q7",
+            "type": "truefalse",
+            "question": "Understanding Normalization vs. Denormalization is important for database professionals.",
+            "answer": true,
+            "explanation": "Normalization vs. Denormalization is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "normalization-denormalization_q8",
+            "type": "mcq",
+            "question": "What should you do before using Normalization vs. Denormalization in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

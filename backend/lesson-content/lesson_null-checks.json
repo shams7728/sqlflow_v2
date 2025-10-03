@@ -1,0 +1,251 @@
+{
+    "id": "null-checks",
+    "title": "NULL Checks in SQL",
+    "category": "Filtering",
+    "difficulty": "Beginner",
+    "estimatedTime": "8 min",
+    "starterQuery": "SELECT * FROM students WHERE grade IS NULL;",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is NULL in SQL?\nNULL represents missing, unknown, or undefined data in a table. It's not the same as 0 or an empty string—it means 'no value.'"
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Why Use NULL Checks?\nTo identify incomplete or missing data. For example, you might want to find all students who haven't been assigned a grade yet."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Where is NULL Commonly Used?\nNULL appears in optional fields or during data entry when a value is not available. You may use it in WHERE clauses or conditional expressions."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. How to Check for NULL?\nUse `IS NULL` to find rows with missing data and `IS NOT NULL` for rows with present values."
+        },
+        {
+            "type": "note",
+            "text": "You cannot use `=` to compare NULL values. Always use `IS NULL` or `IS NOT NULL`."
+        },
+        {
+            "type": "code",
+            "text": "SELECT * FROM students WHERE grade IS NULL;"
+        }
+    ],
+    "examples": [
+        {
+            "query": "SELECT name FROM students WHERE grade IS NULL;",
+            "description": "Find students with missing grade",
+            "explanation": "Returns names of students whose grade is not recorded."
+        },
+        {
+            "query": "SELECT * FROM students WHERE grade IS NOT NULL;",
+            "description": "Find students with valid grades",
+            "explanation": "Returns all students who have been assigned a grade."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "students",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT",
+                        "constraints": "NOT NULL"
+                    },
+                    {
+                        "name": "age",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "grade",
+                        "type": "TEXT"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "students": [
+            {
+                "id": 1,
+                "name": "Alice",
+                "age": 20,
+                "grade": "A"
+            },
+            {
+                "id": 2,
+                "name": "Bob",
+                "age": 21,
+                "grade": null
+            },
+            {
+                "id": 3,
+                "name": "Charlie",
+                "age": 19,
+                "grade": "B"
+            },
+            {
+                "id": 4,
+                "name": "Diana",
+                "age": 22,
+                "grade": null
+            },
+            {
+                "id": 5,
+                "name": "Eva",
+                "age": 18,
+                "grade": "C"
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic NULL Checks in SQL Query",
+            "description": "Practice the fundamental concepts of NULL Checks in SQL.",
+            "starterCode": "-- Practice NULL Checks in SQL\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific NULL Checks in SQL lesson",
+            "hint": "Review the NULL Checks in SQL syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating NULL Checks in SQL functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate NULL Checks in SQL",
+            "description": "Apply NULL Checks in SQL with additional complexity.",
+            "starterCode": "-- Intermediate NULL Checks in SQL practice\n-- Your code here",
+            "solution": "-- More complex NULL Checks in SQL solution",
+            "hint": "Combine NULL Checks in SQL with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using NULL Checks in SQL."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced NULL Checks in SQL",
+            "description": "Master advanced NULL Checks in SQL techniques.",
+            "starterCode": "-- Advanced NULL Checks in SQL practice\n-- Your advanced query here",
+            "solution": "-- Advanced NULL Checks in SQL solution",
+            "hint": "Think about edge cases and optimization for NULL Checks in SQL.",
+            "expectedOutput": "Advanced NULL Checks in SQL results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world NULL Checks in SQL",
+            "description": "Apply NULL Checks in SQL to solve a realistic business problem.",
+            "starterCode": "-- Real-world NULL Checks in SQL scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused NULL Checks in SQL solution",
+            "hint": "Consider how NULL Checks in SQL would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "quiz": [
+        {
+            "id": "null-checks_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of NULL Checks in SQL?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement NULL Checks in SQL functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement NULL Checks in SQL functionality",
+            "explanation": "NULL Checks in SQL is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "null-checks_q2",
+            "type": "truefalse",
+            "question": "NULL Checks in SQL can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including NULL Checks in SQL can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "null-checks_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using NULL Checks in SQL?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using NULL Checks in SQL, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "null-checks_q4",
+            "type": "truefalse",
+            "question": "NULL Checks in SQL is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "null-checks_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with NULL Checks in SQL?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "null-checks_q6",
+            "type": "mcq",
+            "question": "When learning NULL Checks in SQL, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "null-checks_q7",
+            "type": "truefalse",
+            "question": "Understanding NULL Checks in SQL is important for database professionals.",
+            "answer": true,
+            "explanation": "NULL Checks in SQL is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "null-checks_q8",
+            "type": "mcq",
+            "question": "What should you do before using NULL Checks in SQL in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ],
+    "challenges": [
+        {
+            "id": "null-checks_ch1",
+            "title": "Handle Missing Data",
+            "steps": [
+                {
+                    "stepId": "null-checks_ch1_step1",
+                    "description": "Step 1: Get students with NULL grade.",
+                    "solution": "SELECT * FROM students WHERE grade IS NULL;"
+                },
+                {
+                    "stepId": "null-checks_ch1_step2",
+                    "description": "Step 2: Get students with a recorded grade.",
+                    "solution": "SELECT * FROM students WHERE grade IS NOT NULL;"
+                }
+            ]
+        }
+    ]
+}

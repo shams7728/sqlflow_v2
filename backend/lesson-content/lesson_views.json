@@ -1,0 +1,278 @@
+{
+    "id": "views",
+    "title": "VIEWS",
+    "category": "Data Definition",
+    "difficulty": "Intermediate",
+    "estimatedTime": "20 min",
+    "starterQuery": "/* Let's create a View to simplify our data access. */\n\nCREATE VIEW v_engineering_staff AS\nSELECT\n    e.name,\n    e.role,\n    d.name AS department_name\nFROM\n    employees e\nJOIN\n    departments d ON e.department_id = d.id\nWHERE\n    d.name = 'Engineering';",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is a VIEW?\nA `VIEW` is a virtual table based on the result-set of an SQL statement. It contains rows and columns, just like a real table, but it doesn't store any data itself. The data is generated dynamically when you query the view."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Why use a VIEW?\nViews are used for several reasons: to simplify complex queries involving multiple joins; to provide a consistent, abstract interface to users even if the underlying tables change; and to implement security by restricting access to specific columns or rows."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. How does it work?\nWhen you create a view, the database stores the `SELECT` statement. Each time you run a query against the view, the database executes the stored `SELECT` statement in the background to produce the results."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. What is the syntax?\nThe basic syntax is `CREATE VIEW view_name AS SELECT column1, column2, ... FROM table_name WHERE condition;`. After a view is created, you can query it just like a regular table: `SELECT * FROM view_name;`."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "employees",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "role",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "salary",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "department_id",
+                        "type": "INTEGER"
+                    }
+                ]
+            },
+            {
+                "name": "departments",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "employees": [
+            {
+                "id": 1,
+                "name": "Alice",
+                "role": "Lead Engineer",
+                "salary": 120000,
+                "department_id": 1
+            },
+            {
+                "id": 2,
+                "name": "Bob",
+                "role": "Software Engineer",
+                "salary": 95000,
+                "department_id": 1
+            },
+            {
+                "id": 3,
+                "name": "Charlie",
+                "role": "Sales Director",
+                "salary": 110000,
+                "department_id": 2
+            },
+            {
+                "id": 4,
+                "name": "Diana",
+                "role": "Sales Associate",
+                "salary": 70000,
+                "department_id": 2
+            },
+            {
+                "id": 5,
+                "name": "Eve",
+                "role": "HR Manager",
+                "salary": 85000,
+                "department_id": 3
+            }
+        ],
+        "departments": [
+            {
+                "id": 1,
+                "name": "Engineering"
+            },
+            {
+                "id": 2,
+                "name": "Sales"
+            },
+            {
+                "id": 3,
+                "name": "Human Resources"
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic VIEWS Query",
+            "description": "Practice the fundamental concepts of VIEWS.",
+            "starterCode": "-- Practice VIEWS\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific VIEWS lesson",
+            "hint": "Review the VIEWS syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating VIEWS functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate VIEWS",
+            "description": "Apply VIEWS with additional complexity.",
+            "starterCode": "-- Intermediate VIEWS practice\n-- Your code here",
+            "solution": "-- More complex VIEWS solution",
+            "hint": "Combine VIEWS with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using VIEWS."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced VIEWS",
+            "description": "Master advanced VIEWS techniques.",
+            "starterCode": "-- Advanced VIEWS practice\n-- Your advanced query here",
+            "solution": "-- Advanced VIEWS solution",
+            "hint": "Think about edge cases and optimization for VIEWS.",
+            "expectedOutput": "Advanced VIEWS results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world VIEWS",
+            "description": "Apply VIEWS to solve a realistic business problem.",
+            "starterCode": "-- Real-world VIEWS scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused VIEWS solution",
+            "hint": "Consider how VIEWS would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "quiz": [
+        {
+            "id": "views_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of VIEWS?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement VIEWS functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement VIEWS functionality",
+            "explanation": "VIEWS is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "views_q2",
+            "type": "truefalse",
+            "question": "VIEWS can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including VIEWS can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "views_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using VIEWS?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using VIEWS, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "views_q4",
+            "type": "truefalse",
+            "question": "VIEWS is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "views_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with VIEWS?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "views_q6",
+            "type": "mcq",
+            "question": "When learning VIEWS, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "views_q7",
+            "type": "truefalse",
+            "question": "Understanding VIEWS is important for database professionals.",
+            "answer": true,
+            "explanation": "VIEWS is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "views_q8",
+            "type": "mcq",
+            "question": "What should you do before using VIEWS in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ],
+    "challenges": [
+        {
+            "id": "views_ch1",
+            "title": "Create a High-Earners View",
+            "steps": [
+                {
+                    "stepId": "views_ch1_step1",
+                    "description": "Create a view named `v_high_earners` that contains the name, role, and salary of all employees earning more than $100,000.",
+                    "solution": "CREATE VIEW v_high_earners AS SELECT name, role, salary FROM employees WHERE salary > 100000;"
+                },
+                {
+                    "stepId": "views_ch1_step2",
+                    "description": "Query your new view to find the average salary of the high earners.",
+                    "solution": "SELECT AVG(salary) FROM v_high_earners;"
+                }
+            ]
+        },
+        {
+            "id": "views_ch2",
+            "title": "Create a Department Roster View",
+            "steps": [
+                {
+                    "stepId": "views_ch2_step1",
+                    "description": "Create a view named `v_department_roster` that joins `employees` and `departments` to show the employee's name and their department's name.",
+                    "solution": "CREATE VIEW v_department_roster AS SELECT e.name AS employee_name, d.name AS department_name FROM employees e JOIN departments d ON e.department_id = d.id;"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,251 @@
+{
+    "id": "case-expression",
+    "title": "CASE Expression",
+    "category": "Filtering",
+    "difficulty": "Intermediate",
+    "estimatedTime": "12 min",
+    "starterQuery": "SELECT name, grade, CASE WHEN grade = 'A' THEN 'Excellent' WHEN grade = 'B' THEN 'Good' ELSE 'Needs Improvement' END AS remarks FROM students;",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is a CASE Expression?\nThe CASE expression is a conditional expression in SQL that lets you perform IF-THEN-ELSE logic directly in queries."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Why use CASE Expressions?\nThey allow you to transform or classify data within your SELECT statements based on conditions — without needing to modify the underlying data."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Where can CASE be used?\nCASE can be used in SELECT, WHERE, ORDER BY, GROUP BY, and even inside aggregations."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. How to use it?\nCASE WHEN condition THEN result [WHEN ...] [ELSE default] END."
+        },
+        {
+            "type": "code",
+            "text": "SELECT name, grade,\n  CASE \n    WHEN grade = 'A' THEN 'Excellent'\n    WHEN grade = 'B' THEN 'Good'\n    ELSE 'Needs Improvement'\n  END AS remarks\nFROM students;"
+        },
+        {
+            "type": "note",
+            "text": "The CASE expression always ends with END, and you can use as many WHEN conditions as needed."
+        }
+    ],
+    "examples": [
+        {
+            "query": "SELECT name, CASE WHEN age >= 21 THEN 'Adult' ELSE 'Minor' END AS status FROM students;",
+            "description": "Classify students by age",
+            "explanation": "Returns a list of students labeled as 'Adult' or 'Minor' based on their age."
+        },
+        {
+            "query": "SELECT name, grade, CASE WHEN grade = 'A' THEN 'Excellent' WHEN grade = 'B' THEN 'Good' ELSE 'Average' END AS performance FROM students;",
+            "description": "Evaluate grade level",
+            "explanation": "Adds a new column 'performance' based on the value of grade."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "students",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT",
+                        "constraints": "NOT NULL"
+                    },
+                    {
+                        "name": "age",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "grade",
+                        "type": "TEXT"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "students": [
+            {
+                "id": 1,
+                "name": "Alice",
+                "age": 20,
+                "grade": "A"
+            },
+            {
+                "id": 2,
+                "name": "Bob",
+                "age": 22,
+                "grade": "B"
+            },
+            {
+                "id": 3,
+                "name": "Charlie",
+                "age": 19,
+                "grade": "C"
+            },
+            {
+                "id": 4,
+                "name": "Diana",
+                "age": 23,
+                "grade": "A"
+            },
+            {
+                "id": 5,
+                "name": "Eva",
+                "age": 18,
+                "grade": "B"
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic CASE Expression Query",
+            "description": "Practice the fundamental concepts of CASE Expression.",
+            "starterCode": "-- Practice CASE Expression\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific CASE Expression lesson",
+            "hint": "Review the CASE Expression syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating CASE Expression functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate CASE Expression",
+            "description": "Apply CASE Expression with additional complexity.",
+            "starterCode": "-- Intermediate CASE Expression practice\n-- Your code here",
+            "solution": "-- More complex CASE Expression solution",
+            "hint": "Combine CASE Expression with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using CASE Expression."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced CASE Expression",
+            "description": "Master advanced CASE Expression techniques.",
+            "starterCode": "-- Advanced CASE Expression practice\n-- Your advanced query here",
+            "solution": "-- Advanced CASE Expression solution",
+            "hint": "Think about edge cases and optimization for CASE Expression.",
+            "expectedOutput": "Advanced CASE Expression results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world CASE Expression",
+            "description": "Apply CASE Expression to solve a realistic business problem.",
+            "starterCode": "-- Real-world CASE Expression scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused CASE Expression solution",
+            "hint": "Consider how CASE Expression would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "quiz": [
+        {
+            "id": "case-expression_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of CASE Expression?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement CASE Expression functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement CASE Expression functionality",
+            "explanation": "CASE Expression is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "case-expression_q2",
+            "type": "truefalse",
+            "question": "CASE Expression can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including CASE Expression can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "case-expression_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using CASE Expression?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using CASE Expression, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "case-expression_q4",
+            "type": "truefalse",
+            "question": "CASE Expression is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "case-expression_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with CASE Expression?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "case-expression_q6",
+            "type": "mcq",
+            "question": "When learning CASE Expression, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "case-expression_q7",
+            "type": "truefalse",
+            "question": "Understanding CASE Expression is important for database professionals.",
+            "answer": true,
+            "explanation": "CASE Expression is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "case-expression_q8",
+            "type": "mcq",
+            "question": "What should you do before using CASE Expression in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ],
+    "challenges": [
+        {
+            "id": "case-expression_ch1",
+            "title": "Conditional Grade Interpretation",
+            "steps": [
+                {
+                    "stepId": "case-expression_ch1_step1",
+                    "description": "Step 1: Show name, grade, and a 'remarks' column where A = Excellent, B = Good, others = Average.",
+                    "solution": "SELECT name, grade, CASE WHEN grade = 'A' THEN 'Excellent' WHEN grade = 'B' THEN 'Good' ELSE 'Average' END AS remarks FROM students;"
+                },
+                {
+                    "stepId": "case-expression_ch1_step2",
+                    "description": "Step 2: Select name and a column 'age_group' that shows 'Adult' if age >= 21, else 'Minor'.",
+                    "solution": "SELECT name, CASE WHEN age >= 21 THEN 'Adult' ELSE 'Minor' END AS age_group FROM students;"
+                }
+            ]
+        }
+    ]
+}

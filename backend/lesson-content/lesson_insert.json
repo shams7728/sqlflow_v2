@@ -1,0 +1,204 @@
+{
+    "id": "insert",
+    "title": "INSERT INTO Statement",
+    "category": "Data Modification",
+    "difficulty": "Beginner",
+    "estimatedTime": "15 min",
+    "starterQuery": "/* Let's add a new employee to our table! */\n\nINSERT INTO new_hires (id, name, role)\nVALUES (1, 'Alice', 'Software Engineer');",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is INSERT INTO?\nThe `INSERT INTO` statement is a Data Manipulation Language (DML) command used to add new rows of data into a table."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. What is the basic syntax?\nThere are two main ways to write it. If you are adding values for all columns in the table, you can use `INSERT INTO table_name VALUES (value1, value2, ...);`. It's safer, however, to specify the column names: `INSERT INTO table_name (column1, column2) VALUES (value1, value2);`."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Why specify column names?\nSpecifying the column names is a best practice because it makes your query more readable and less prone to errors if the table structure changes in the future. It also allows you to insert data into only specific columns, letting others default to NULL or their predefined default value."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. How do you insert multiple rows?\nYou can insert multiple rows in a single statement by adding multiple tuples of values, separated by commas, after the `VALUES` keyword. This is much more efficient than running separate `INSERT` statements for each row."
+        },
+        {
+            "type": "code",
+            "text": "-- Inserting multiple rows at once:\nINSERT INTO new_hires (id, name, role)\nVALUES\n    (2, 'Bob', 'Project Manager'),\n    (3, 'Charlie', 'Data Analyst');"
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "new_hires",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TEXT",
+                        "constraints": "NOT NULL"
+                    },
+                    {
+                        "name": "role",
+                        "type": "TEXT"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {},
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic INSERT INTO Statement Query",
+            "description": "Practice the fundamental concepts of INSERT INTO Statement.",
+            "starterCode": "-- Practice INSERT INTO Statement\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific INSERT INTO Statement lesson",
+            "hint": "Review the INSERT INTO Statement syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating INSERT INTO Statement functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate INSERT INTO Statement",
+            "description": "Apply INSERT INTO Statement with additional complexity.",
+            "starterCode": "-- Intermediate INSERT INTO Statement practice\n-- Your code here",
+            "solution": "-- More complex INSERT INTO Statement solution",
+            "hint": "Combine INSERT INTO Statement with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using INSERT INTO Statement."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced INSERT INTO Statement",
+            "description": "Master advanced INSERT INTO Statement techniques.",
+            "starterCode": "-- Advanced INSERT INTO Statement practice\n-- Your advanced query here",
+            "solution": "-- Advanced INSERT INTO Statement solution",
+            "hint": "Think about edge cases and optimization for INSERT INTO Statement.",
+            "expectedOutput": "Advanced INSERT INTO Statement results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world INSERT INTO Statement",
+            "description": "Apply INSERT INTO Statement to solve a realistic business problem.",
+            "starterCode": "-- Real-world INSERT INTO Statement scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused INSERT INTO Statement solution",
+            "hint": "Consider how INSERT INTO Statement would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "quiz": [
+        {
+            "id": "insert_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of INSERT INTO Statement?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement INSERT INTO Statement functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement INSERT INTO Statement functionality",
+            "explanation": "INSERT INTO Statement is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "insert_q2",
+            "type": "truefalse",
+            "question": "INSERT INTO Statement can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including INSERT INTO Statement can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "insert_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using INSERT INTO Statement?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using INSERT INTO Statement, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "insert_q4",
+            "type": "truefalse",
+            "question": "INSERT INTO Statement is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "insert_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with INSERT INTO Statement?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "insert_q6",
+            "type": "mcq",
+            "question": "When learning INSERT INTO Statement, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "insert_q7",
+            "type": "truefalse",
+            "question": "Understanding INSERT INTO Statement is important for database professionals.",
+            "answer": true,
+            "explanation": "INSERT INTO Statement is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "insert_q8",
+            "type": "mcq",
+            "question": "What should you do before using INSERT INTO Statement in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ],
+    "challenges": [
+        {
+            "id": "insert_ch1",
+            "title": "Add a Product to Inventory",
+            "steps": [
+                {
+                    "stepId": "insert_ch1_step1",
+                    "description": "Imagine a `products` table with columns `product_id`, `product_name`, and `price`. Write the command to insert a new product with an ID of 101, a name of 'Super Widget', and a price of 19.99.",
+                    "solution": "INSERT INTO products (product_id, product_name, price) VALUES (101, 'Super Widget', 19.99);"
+                }
+            ]
+        },
+        {
+            "id": "insert_ch2",
+            "title": "Log a System Event",
+            "steps": [
+                {
+                    "stepId": "insert_ch2_step1",
+                    "description": "You have a `logs` table with `log_id`, `event_time`, and `message` columns. Add a new log entry with an ID of 500 and a message of 'System reboot initiated'. The `event_time` can be left empty (NULL).",
+                    "solution": "INSERT INTO logs (log_id, message) VALUES (500, 'System reboot initiated');"
+                }
+            ]
+        }
+    ]
+}

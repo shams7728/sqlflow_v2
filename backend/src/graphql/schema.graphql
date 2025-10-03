@@ -1,0 +1,130 @@
+type User {
+  id: ID!
+  email: String!
+  name: String
+  avatar: String
+  role: Role!
+  isGuest: Boolean!
+  progress: [Progress!]!
+  achievements: [Achievement!]!
+  createdAt: DateTime!
+}
+
+type Progress {
+  id: ID!
+  lessonId: String!
+  status: ProgressStatus!
+  score: Int
+  timeSpent: Int!
+  completedAt: DateTime
+  user: User!
+}
+
+type Achievement {
+  id: ID!
+  badgeType: String!
+  title: String!
+  description: String!
+  iconUrl: String
+  earnedAt: DateTime!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Lesson {
+  id: String!
+  title: String!
+  category: String!
+  difficulty: String!
+  estimatedTime: String!
+  theory: [TheoryBlock!]!
+  examples: [Example!]!
+  practice: [Exercise!]!
+  quiz: [QuizQuestion!]!
+}
+
+type TheoryBlock {
+  type: String!
+  text: String!
+}
+
+type Example {
+  query: String!
+  description: String!
+  explanation: String!
+}
+
+type Exercise {
+  id: String!
+  challenge: String!
+  solution: String!
+}
+
+type QuizQuestion {
+  id: String!
+  type: String!
+  question: String!
+  options: [String!]
+  answer: String!
+}
+
+type QueryResult {
+  success: Boolean!
+  data: [JSON!]
+  columns: [String!]
+  error: String
+  executionTime: Float
+}
+
+type Query {
+  # User queries
+  me: User
+  
+  # Lesson queries
+  lessons: [Lesson!]!
+  lesson(id: String!): Lesson
+  
+  # Progress queries
+  myProgress: [Progress!]!
+  
+  # Achievement queries
+  achievements: [Achievement!]!
+  
+  # Leaderboard
+  leaderboard(limit: Int = 10): [User!]!
+}
+
+type Mutation {
+  # Authentication
+  login(email: String!, password: String!): AuthPayload!
+  register(email: String!, password: String!, name: String): AuthPayload!
+  loginAsGuest: AuthPayload!
+  
+  # Progress tracking
+  updateProgress(lessonId: String!, status: ProgressStatus!, score: Int, timeSpent: Int!): Progress!
+  
+  # Query execution
+  executeQuery(lessonId: String!, query: String!): QueryResult!
+  
+  # Feedback
+  submitFeedback(message: String!, type: String!): Boolean!
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  MASTERED
+}
+
+scalar DateTime
+scalar JSON

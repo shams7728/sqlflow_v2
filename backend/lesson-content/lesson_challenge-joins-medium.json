@@ -1,0 +1,284 @@
+{
+    "id": "challenge-joins-medium",
+    "title": "Challenge: Top Author Analytics",
+    "category": "Challenges",
+    "difficulty": "Intermediate",
+    "estimatedTime": "30 min",
+    "starterQuery": "/* This is a conceptual challenge to test your analytical thinking using JOINs. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. The Business Problem\nYou are a data analyst for an online bookstore. The marketing department wants to feature the top 5 best-selling authors on the homepage. Your task is to generate a report that lists these top 5 authors based on their total revenue, sorted from highest to lowest."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Analyzing the Schema\nTo solve this, you have three tables:\n- `authors` (author_id, author_name)\n- `books` (book_id, title, author_id, price)\n- `sales` (sale_id, book_id, quantity_sold)"
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Devising a Query Plan\nThis problem requires combining data from all three tables. The logical steps are:\n- First, calculate the revenue for each individual sale (`quantity_sold` * `price`).\n- To do this, you must `JOIN` the `sales` table with the `books` table on `book_id`.\n- Next, to link this revenue to an author, you must `JOIN` the result with the `authors` table on `author_id`.\n- With all data linked, you can `GROUP BY` the author's name.\n- For each author group, calculate the `SUM()` of the revenue.\n- Finally, `ORDER BY` the total revenue in `DESC` order and take the top 5 results using `LIMIT`."
+        },
+        {
+            "type": "code",
+            "text": "-- The Final Solution Query:\nSELECT\n    a.author_name,\n    SUM(s.quantity_sold * b.price) AS total_revenue\nFROM\n    sales s\n-- Join sales to books to get the price for each sale\nJOIN\n    books b ON s.book_id = b.book_id\n-- Join the result to authors to get the author's name\nJOIN\n    authors a ON b.author_id = a.author_id\n-- Group all sales data by author\nGROUP BY\n    a.author_name\n-- Order the authors by their total revenue\nORDER BY\n    total_revenue DESC\n-- Limit to only the top 5\nLIMIT 5;"
+        },
+        {
+            "type": "note",
+            "text": "This challenge demonstrates a very common and powerful analytics pattern: joining multiple tables to enrich transactional data, then grouping and aggregating to find insights."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "authors",
+                "columns": [
+                    {
+                        "name": "author_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "author_name",
+                        "type": "TEXT"
+                    }
+                ]
+            },
+            {
+                "name": "books",
+                "columns": [
+                    {
+                        "name": "book_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "title",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "author_id",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "price",
+                        "type": "REAL"
+                    }
+                ]
+            },
+            {
+                "name": "sales",
+                "columns": [
+                    {
+                        "name": "sale_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "book_id",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "quantity_sold",
+                        "type": "INTEGER"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "authors": [
+            {
+                "author_id": 1,
+                "author_name": "Jane Austen"
+            },
+            {
+                "author_id": 2,
+                "author_name": "Mark Twain"
+            },
+            {
+                "author_id": 3,
+                "author_name": "Leo Tolstoy"
+            }
+        ],
+        "books": [
+            {
+                "book_id": 101,
+                "title": "Pride and Prejudice",
+                "author_id": 1,
+                "price": 12.99
+            },
+            {
+                "book_id": 102,
+                "title": "Sense and Sensibility",
+                "author_id": 1,
+                "price": 11.99
+            },
+            {
+                "book_id": 201,
+                "title": "Adventures of Huckleberry Finn",
+                "author_id": 2,
+                "price": 9.99
+            },
+            {
+                "book_id": 301,
+                "title": "War and Peace",
+                "author_id": 3,
+                "price": 19.99
+            }
+        ],
+        "sales": [
+            {
+                "sale_id": 1,
+                "book_id": 101,
+                "quantity_sold": 500
+            },
+            {
+                "sale_id": 2,
+                "book_id": 201,
+                "quantity_sold": 800
+            },
+            {
+                "sale_id": 3,
+                "book_id": 301,
+                "quantity_sold": 300
+            },
+            {
+                "sale_id": 4,
+                "book_id": 102,
+                "quantity_sold": 400
+            },
+            {
+                "sale_id": 5,
+                "book_id": 201,
+                "quantity_sold": 200
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic JOIN",
+            "description": "Write a basic JOIN query between two tables.",
+            "starterCode": "-- Basic JOIN query\nSELECT \n-- Columns from both tables\nFROM table1\nJOIN table2 ON \n-- Join condition",
+            "solution": "SELECT c.name, o.order_date FROM customers c JOIN orders o ON c.customer_id = o.customer_id;",
+            "hint": "Use table aliases and specify the join condition with ON.",
+            "expectedOutput": "Combined data from both tables where the join condition matches."
+        },
+        {
+            "id": "practice_2",
+            "title": "JOIN with WHERE",
+            "description": "Combine JOIN with WHERE clause for filtering.",
+            "starterCode": "-- JOIN with filtering\nSELECT \n-- Your columns\nFROM table1 t1\nJOIN table2 t2 ON \n-- Join condition\nWHERE \n-- Filter condition",
+            "solution": "SELECT c.name, o.total FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.total > 100;",
+            "hint": "Add WHERE clause after the JOIN to filter the combined results.",
+            "expectedOutput": "Joined data that also meets the WHERE condition."
+        },
+        {
+            "id": "practice_3",
+            "title": "Multiple JOINs",
+            "description": "Join three or more tables together.",
+            "starterCode": "-- Multiple JOINs\nSELECT \n-- Columns from multiple tables\nFROM table1 t1\nJOIN table2 t2 ON \n-- First join condition\nJOIN table3 t3 ON \n-- Second join condition",
+            "solution": "SELECT c.name, o.order_date, p.product_name FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN products p ON o.product_id = p.product_id;",
+            "hint": "Chain multiple JOIN clauses, each with their own ON condition.",
+            "expectedOutput": "Data combined from all joined tables."
+        },
+        {
+            "id": "practice_4",
+            "title": "Advanced JOIN Query",
+            "description": "Create a comprehensive JOIN query with aliases and filtering.",
+            "starterCode": "-- Advanced JOIN query\nSELECT \n-- Aliased columns\nFROM \n-- Multiple tables with aliases and joins\nWHERE \n-- Additional filtering",
+            "solution": "SELECT c.name AS customer_name, COUNT(o.order_id) AS order_count FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id, c.name;",
+            "hint": "Combine JOINs with GROUP BY and aggregate functions for advanced analysis.",
+            "expectedOutput": "Aggregated data showing relationships between tables."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "challenge-joins-medium_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Challenge: Top Author Analytics?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Challenge: Top Author Analytics functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Challenge: Top Author Analytics functionality",
+            "explanation": "Challenge: Top Author Analytics is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "challenge-joins-medium_q2",
+            "type": "truefalse",
+            "question": "Challenge: Top Author Analytics can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Challenge: Top Author Analytics can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "challenge-joins-medium_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Challenge: Top Author Analytics?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Challenge: Top Author Analytics, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "challenge-joins-medium_q4",
+            "type": "truefalse",
+            "question": "Challenge: Top Author Analytics is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "challenge-joins-medium_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Challenge: Top Author Analytics?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "challenge-joins-medium_q6",
+            "type": "mcq",
+            "question": "When learning Challenge: Top Author Analytics, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "challenge-joins-medium_q7",
+            "type": "truefalse",
+            "question": "Understanding Challenge: Top Author Analytics is important for database professionals.",
+            "answer": true,
+            "explanation": "Challenge: Top Author Analytics is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "challenge-joins-medium_q8",
+            "type": "mcq",
+            "question": "What should you do before using Challenge: Top Author Analytics in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

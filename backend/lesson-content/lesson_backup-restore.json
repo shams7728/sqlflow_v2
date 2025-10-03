@@ -1,0 +1,165 @@
+{
+    "id": "backup-restore",
+    "title": "Backup and Restore",
+    "category": "Security & Admin",
+    "difficulty": "Advanced",
+    "estimatedTime": "25 min",
+    "starterQuery": "/* This is a conceptual lesson on database backup and recovery strategies. */\n-- The examples below show conceptual commands.",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is a Database Backup?\nA database backup is a copy of data that is stored separately from the original. Its primary purpose is to allow you to restore the database to a previous state in case of data loss, corruption, hardware failure, or other disasters."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. What are the main types of backups?\nThere are two main categories: **Physical backups** copy the actual data files, making for a very fast restore. **Logical backups** export the data into a file (like a `.sql` script containing `CREATE TABLE` and `INSERT` statements), which is more flexible but slower to restore."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. What are Full, Differential, and Incremental Backups?\n- **Full Backup:** A complete copy of the entire database. \n- **Differential Backup:** Copies only the data that has changed since the last *full* backup. \n- **Incremental Backup:** Copies only the data that has changed since the last backup of *any* type (full or incremental)."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. What is a Recovery Plan?\nA recovery plan is a documented strategy that outlines how to restore a database after a failure. It includes details like the location of backups, the order of restoration (e.g., restore the last full backup, then all subsequent differential backups), and who is responsible. A backup is useless without a tested recovery plan."
+        },
+        {
+            "type": "code",
+            "text": "-- Example: A logical backup using a command-line tool (PostgreSQL)\n-- pg_dump -U username -d mydatabase > mydatabase_backup.sql\n\n-- Example: Restoring from that backup\n-- psql -U username -d mydatabase < mydatabase_backup.sql"
+        },
+        {
+            "type": "note",
+            "text": "For SQLite, a backup can be as simple as making a copy of the `.db` file itself. More advanced databases have dedicated tools for managing complex backup strategies."
+        }
+    ],
+    "schema": {
+        "tables": []
+    },
+    "sample_data": {},
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Backup and Restore Query",
+            "description": "Practice the fundamental concepts of Backup and Restore.",
+            "starterCode": "-- Practice Backup and Restore\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Backup and Restore lesson",
+            "hint": "Review the Backup and Restore syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Backup and Restore functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Backup and Restore",
+            "description": "Apply Backup and Restore with additional complexity.",
+            "starterCode": "-- Intermediate Backup and Restore practice\n-- Your code here",
+            "solution": "-- More complex Backup and Restore solution",
+            "hint": "Combine Backup and Restore with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Backup and Restore."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Backup and Restore",
+            "description": "Master advanced Backup and Restore techniques.",
+            "starterCode": "-- Advanced Backup and Restore practice\n-- Your advanced query here",
+            "solution": "-- Advanced Backup and Restore solution",
+            "hint": "Think about edge cases and optimization for Backup and Restore.",
+            "expectedOutput": "Advanced Backup and Restore results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Backup and Restore",
+            "description": "Apply Backup and Restore to solve a realistic business problem.",
+            "starterCode": "-- Real-world Backup and Restore scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Backup and Restore solution",
+            "hint": "Consider how Backup and Restore would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "backup-restore_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Backup and Restore?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Backup and Restore functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Backup and Restore functionality",
+            "explanation": "Backup and Restore is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "backup-restore_q2",
+            "type": "truefalse",
+            "question": "Backup and Restore can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Backup and Restore can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "backup-restore_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Backup and Restore?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Backup and Restore, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "backup-restore_q4",
+            "type": "truefalse",
+            "question": "Backup and Restore is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "backup-restore_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Backup and Restore?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "backup-restore_q6",
+            "type": "mcq",
+            "question": "When learning Backup and Restore, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "backup-restore_q7",
+            "type": "truefalse",
+            "question": "Understanding Backup and Restore is important for database professionals.",
+            "answer": true,
+            "explanation": "Backup and Restore is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "backup-restore_q8",
+            "type": "mcq",
+            "question": "What should you do before using Backup and Restore in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

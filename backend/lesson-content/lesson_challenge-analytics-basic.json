@@ -1,0 +1,269 @@
+{
+    "id": "challenge-analytics-basic",
+    "title": "Challenge: Basic Sales Analytics",
+    "category": "Challenges",
+    "difficulty": "Intermediate",
+    "estimatedTime": "25 min",
+    "starterQuery": "/* This is a conceptual challenge to test your analytical thinking. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. The Business Request\nYou are a data analyst. Your manager has sent you the following request: 'I need a summary report of our top-performing product categories. Please provide a list showing the total number of orders, total revenue, and average order value for each category. To keep the report focused, only include categories that have generated more than $20,000 in total revenue. Please sort the final list by the highest revenue first.'"
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Available Data Schema\nTo fulfill this request, you have two primary tables available:\n- `products` (product_id, product_name, category)\n- `orders` (order_id, product_id, quantity, price_per_unit)"
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Step-by-Step Solution Logic\nTo build the final query, we must think in logical steps:\n- **Step A: Calculate Revenue per Order Item:** The `orders` table doesn't have a total amount. First, we must calculate it for each row (`quantity * price_per_unit`).\n- **Step B: Link Orders to Categories:** To analyze by category, we must connect the orders to their product information. This requires an `INNER JOIN` between `orders` and `products` on `product_id`.\n- **Step C: Group the Data:** The request asks for metrics 'for each category'. This is a clear signal that we need to use `GROUP BY p.category`.\n- **Step D: Calculate Aggregates:** For each group, we need to calculate three things: `COUNT(o.order_id)` for the number of orders, `SUM(o.quantity * o.price_per_unit)` for total revenue, and `AVG(o.quantity * o.price_per_unit)` for the average order value.\n- **Step E: Filter the Groups:** The request specifies 'categories with more than $20,000 in revenue'. Since this is a filter on an aggregate result (`SUM`), we must use the `HAVING` clause.\n- **Step F: Sort the Final Result:** Finally, the report must be sorted by the highest revenue first, which requires an `ORDER BY total_revenue DESC`."
+        },
+        {
+            "type": "code",
+            "text": "-- The Final Solution Query:\nSELECT\n    p.category,\n    COUNT(o.order_id) AS number_of_orders,\n    SUM(o.quantity * o.price_per_unit) AS total_revenue,\n    AVG(o.quantity * o.price_per_unit) AS average_order_value\nFROM\n    orders AS o\nINNER JOIN\n    products AS p ON o.product_id = p.product_id\nGROUP BY\n    p.category\nHAVING\n    SUM(o.quantity * o.price_per_unit) > 20000\nORDER BY\n    total_revenue DESC;"
+        },
+        {
+            "type": "note",
+            "text": "Key Takeaway: This challenge demonstrates the fundamental pattern of business analytics: joining tables to create a complete dataset, grouping by a dimension (like category), calculating metrics with aggregate functions, filtering those groups with HAVING, and sorting the final result."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "products",
+                "columns": [
+                    {
+                        "name": "product_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "product_name",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "category",
+                        "type": "TEXT"
+                    }
+                ]
+            },
+            {
+                "name": "orders",
+                "columns": [
+                    {
+                        "name": "order_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "product_id",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "quantity",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "price_per_unit",
+                        "type": "REAL"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "products": [
+            {
+                "product_id": 1,
+                "product_name": "Laptop Pro",
+                "category": "Electronics"
+            },
+            {
+                "product_id": 2,
+                "product_name": "Gaming Mouse",
+                "category": "Electronics"
+            },
+            {
+                "product_id": 3,
+                "product_name": "Denim Jacket",
+                "category": "Apparel"
+            }
+        ],
+        "orders": [
+            {
+                "order_id": 101,
+                "product_id": 1,
+                "quantity": 10,
+                "price_per_unit": 1200
+            },
+            {
+                "order_id": 102,
+                "product_id": 1,
+                "quantity": 8,
+                "price_per_unit": 1250
+            },
+            {
+                "order_id": 103,
+                "product_id": 2,
+                "quantity": 50,
+                "price_per_unit": 80
+            },
+            {
+                "order_id": 104,
+                "product_id": 3,
+                "quantity": 100,
+                "price_per_unit": 45
+            },
+            {
+                "order_id": 105,
+                "product_id": 1,
+                "quantity": 5,
+                "price_per_unit": 1150
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Category Revenue",
+            "description": "Write a query to find the total revenue for each product category. Don't apply any filters yet.",
+            "starterCode": "-- Calculate total revenue by category\nSELECT \n    -- Your code here\nFROM \n    -- Your tables here",
+            "solution": "SELECT \n    p.category,\n    SUM(o.quantity * o.price_per_unit) AS total_revenue\nFROM \n    orders AS o\nINNER JOIN \n    products AS p ON o.product_id = p.product_id\nGROUP BY \n    p.category\nORDER BY \n    total_revenue DESC;",
+            "hint": "You need to JOIN the orders and products tables, then GROUP BY category and use SUM to calculate revenue.",
+            "expectedOutput": [
+                {"category": "Electronics", "total_revenue": 22000},
+                {"category": "Apparel", "total_revenue": 4500}
+            ]
+        },
+        {
+            "id": "practice_2", 
+            "title": "Count Orders per Category",
+            "description": "Find how many orders each category has received.",
+            "starterCode": "-- Count orders by category\nSELECT \n    -- Your code here\nFROM \n    -- Your tables here",
+            "solution": "SELECT \n    p.category,\n    COUNT(o.order_id) AS order_count\nFROM \n    orders AS o\nINNER JOIN \n    products AS p ON o.product_id = p.product_id\nGROUP BY \n    p.category\nORDER BY \n    order_count DESC;",
+            "hint": "Use COUNT(o.order_id) to count the number of orders for each category.",
+            "expectedOutput": [
+                {"category": "Electronics", "order_count": 4},
+                {"category": "Apparel", "order_count": 1}
+            ]
+        },
+        {
+            "id": "practice_3",
+            "title": "Average Order Value",
+            "description": "Calculate the average order value for each category.",
+            "starterCode": "-- Calculate average order value by category\nSELECT \n    -- Your code here\nFROM \n    -- Your tables here",
+            "solution": "SELECT \n    p.category,\n    AVG(o.quantity * o.price_per_unit) AS avg_order_value\nFROM \n    orders AS o\nINNER JOIN \n    products AS p ON o.product_id = p.product_id\nGROUP BY \n    p.category\nORDER BY \n    avg_order_value DESC;",
+            "hint": "Use AVG(o.quantity * o.price_per_unit) to calculate the average order value.",
+            "expectedOutput": [
+                {"category": "Electronics", "avg_order_value": 5500},
+                {"category": "Apparel", "avg_order_value": 4500}
+            ]
+        },
+        {
+            "id": "practice_4",
+            "title": "Complete Analytics Report",
+            "description": "Create the complete report with all metrics, filtering categories with revenue > $10,000.",
+            "starterCode": "-- Complete analytics report\nSELECT \n    -- Your code here\nFROM \n    -- Your tables here\n-- Add GROUP BY, HAVING, and ORDER BY clauses",
+            "solution": "SELECT \n    p.category,\n    COUNT(o.order_id) AS number_of_orders,\n    SUM(o.quantity * o.price_per_unit) AS total_revenue,\n    AVG(o.quantity * o.price_per_unit) AS average_order_value\nFROM \n    orders AS o\nINNER JOIN \n    products AS p ON o.product_id = p.product_id\nGROUP BY \n    p.category\nHAVING \n    SUM(o.quantity * o.price_per_unit) > 10000\nORDER BY \n    total_revenue DESC;",
+            "hint": "Combine all the previous concepts: JOIN, GROUP BY, aggregate functions, HAVING clause, and ORDER BY.",
+            "expectedOutput": [
+                {"category": "Electronics", "number_of_orders": 4, "total_revenue": 22000, "average_order_value": 5500}
+            ]
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "bana_q1",
+            "type": "mcq",
+            "question": "To filter groups based on the result of an aggregate function, which clause is required?",
+            "options": [
+                "WHERE",
+                "FILTER", 
+                "HAVING",
+                "LIMIT"
+            ],
+            "answer": "HAVING",
+            "explanation": "The HAVING clause is used to filter groups after they have been formed by GROUP BY. WHERE filters individual rows before grouping, while HAVING filters groups after aggregation."
+        },
+        {
+            "id": "bana_q2",
+            "type": "mcq",
+            "question": "What is the correct logical order of execution for these clauses?",
+            "options": [
+                "GROUP BY, WHERE, HAVING",
+                "WHERE, HAVING, GROUP BY",
+                "WHERE, GROUP BY, HAVING",
+                "HAVING, WHERE, GROUP BY"
+            ],
+            "answer": "WHERE, GROUP BY, HAVING",
+            "explanation": "SQL executes in this order: WHERE (filter rows) → GROUP BY (group rows) → HAVING (filter groups). This logical order ensures proper data processing."
+        },
+        {
+            "id": "bana_q3",
+            "type": "mcq",
+            "question": "How is the `total_revenue` for each category calculated in the query?",
+            "options": [
+                "SUM(price_per_unit)",
+                "COUNT(quantity)",
+                "SUM(quantity * price_per_unit)",
+                "AVG(quantity)"
+            ],
+            "answer": "SUM(quantity * price_per_unit)",
+            "explanation": "Total revenue is calculated by multiplying quantity by price per unit for each order, then summing all those values for each category."
+        },
+        {
+            "id": "bana_q4",
+            "type": "truefalse",
+            "question": "An `INNER JOIN` is appropriate here because we only care about orders for products that exist in our `products` table.",
+            "answer": true,
+            "explanation": "INNER JOIN only returns rows where there's a match in both tables. Since we need product category information, we only want orders that have corresponding products."
+        },
+        {
+            "id": "bana_q5",
+            "type": "mcq",
+            "question": "To sort the final report from highest revenue to lowest, you would use:",
+            "options": [
+                "ORDER BY total_revenue ASC",
+                "SORT BY total_revenue DESC", 
+                "ORDER BY total_revenue DESC",
+                "GROUP BY total_revenue"
+            ],
+            "answer": "ORDER BY total_revenue DESC",
+            "explanation": "ORDER BY with DESC sorts in descending order (highest to lowest). ASC would sort ascending (lowest to highest). SORT BY is not valid SQL syntax."
+        },
+        {
+            "id": "bana_q6",
+            "type": "truefalse",
+            "question": "It is possible to solve this problem without using a `GROUP BY` clause.",
+            "answer": false,
+            "explanation": "Since we need metrics 'for each category', we must group the data by category. Without GROUP BY, aggregate functions would calculate across all rows, not per category."
+        },
+        {
+            "id": "bana_q7",
+            "type": "mcq",
+            "question": "What is the purpose of aliasing the tables (e.g., `orders AS o`)?",
+            "options": [
+                "It is required for all JOINs",
+                "It improves performance significantly",
+                "It makes the query shorter and avoids ambiguity when columns have the same name",
+                "It hides the real table names"
+            ],
+            "answer": "It makes the query shorter and avoids ambiguity when columns have the same name",
+            "explanation": "Table aliases make queries more readable and help avoid ambiguity when multiple tables have columns with the same name (like 'id' or 'name')."
+        },
+        {
+            "id": "bana_q8",
+            "type": "mcq",
+            "question": "If you wanted to include categories with ANY revenue amount (not just > $20,000), what would you remove?",
+            "options": [
+                "The GROUP BY clause",
+                "The HAVING clause",
+                "The ORDER BY clause", 
+                "The INNER JOIN"
+            ],
+            "answer": "The HAVING clause",
+            "explanation": "The HAVING clause filters groups based on aggregate conditions. Removing it would include all categories regardless of their revenue amount."
+        }
+    ]
+}

@@ -1,0 +1,267 @@
+{
+    "id": "challenge-nested-queries",
+    "title": "Challenge: Nested Queries",
+    "category": "Challenges",
+    "difficulty": "Advanced",
+    "estimatedTime": "30 min",
+    "starterQuery": "/* This is a conceptual challenge on using nested subqueries. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. The Business Problem\nYou are an analyst for a university. The dean wants a list of all students who are enrolled in the 'Computer Science' department and have achieved a grade higher than the average grade of all students in that same department. This will be used to identify candidates for a special scholarship."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Analyzing the Schema\nTo solve this, you have three tables:\n- `students` (student_id, student_name, department_id)\n- `departments` (department_id, department_name)\n- `grades` (grade_id, student_id, grade)"
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Devising a Query Plan\nThis is a multi-step problem that is perfect for nested queries. We need to find a value (the average grade) that depends on another value (the department ID).\n- **Step A (Innermost Query):** First, we need to find the `department_id` for 'Computer Science'. A subquery is perfect for this: `SELECT department_id FROM departments WHERE department_name = 'Computer Science'`.\n- **Step B (Middle Query):** Next, we need to calculate the average grade *only* for students in that department. We'll use the result of Step A inside the `WHERE` clause of another subquery: `SELECT AVG(grade) FROM grades WHERE student_id IN (SELECT student_id FROM students WHERE department_id = ...)`.\n- **Step C (Outer Query):** Finally, we can select the students. The `WHERE` clause will have two conditions: the student must be in the 'Computer Science' department, AND their grade must be greater than the result of our middle query (Step B)."
+        },
+        {
+            "type": "code",
+            "text": "-- The Final Solution Query:\nSELECT\n    s.student_name,\n    g.grade\nFROM\n    students s\nJOIN\n    grades g ON s.student_id = g.student_id\nWHERE\n    s.department_id = (\n        -- Innermost query: Find the department ID for Computer Science\n        SELECT department_id FROM departments WHERE department_name = 'Computer Science'\n    )\nAND\n    g.grade > (\n        -- Middle query: Calculate the average grade for ONLY CS students\n        SELECT AVG(grade) FROM grades\n        WHERE student_id IN (\n            SELECT student_id FROM students WHERE department_id = (\n                -- We need the innermost query again here\n                SELECT department_id FROM departments WHERE department_name = 'Computer Science'\n            )\n        )\n    );"
+        },
+        {
+            "type": "note",
+            "text": "While this works, you can see it gets repetitive. This is a perfect example of a problem that can often be simplified and made more readable using Common Table Expressions (CTEs), which you learned about in a previous lesson."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "students",
+                "columns": [
+                    {
+                        "name": "student_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "student_name",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "department_id",
+                        "type": "INTEGER"
+                    }
+                ]
+            },
+            {
+                "name": "departments",
+                "columns": [
+                    {
+                        "name": "department_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "department_name",
+                        "type": "TEXT"
+                    }
+                ]
+            },
+            {
+                "name": "grades",
+                "columns": [
+                    {
+                        "name": "grade_id",
+                        "type": "INTEGER",
+                        "constraints": "PRIMARY KEY"
+                    },
+                    {
+                        "name": "student_id",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "grade",
+                        "type": "INTEGER"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "students": [
+            {
+                "student_id": 1,
+                "student_name": "Alice",
+                "department_id": 101
+            },
+            {
+                "student_id": 2,
+                "student_name": "Bob",
+                "department_id": 101
+            },
+            {
+                "student_id": 3,
+                "student_name": "Charlie",
+                "department_id": 102
+            },
+            {
+                "student_id": 4,
+                "student_name": "Diana",
+                "department_id": 101
+            }
+        ],
+        "departments": [
+            {
+                "department_id": 101,
+                "department_name": "Computer Science"
+            },
+            {
+                "department_id": 102,
+                "department_name": "Physics"
+            }
+        ],
+        "grades": [
+            {
+                "grade_id": 1,
+                "student_id": 1,
+                "grade": 92
+            },
+            {
+                "grade_id": 2,
+                "student_id": 2,
+                "grade": 85
+            },
+            {
+                "grade_id": 3,
+                "student_id": 3,
+                "grade": 95
+            },
+            {
+                "grade_id": 4,
+                "student_id": 4,
+                "grade": 88
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Challenge: Nested Queries Query",
+            "description": "Practice the fundamental concepts of Challenge: Nested Queries.",
+            "starterCode": "-- Practice Challenge: Nested Queries\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Challenge: Nested Queries lesson",
+            "hint": "Review the Challenge: Nested Queries syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Challenge: Nested Queries functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Challenge: Nested Queries",
+            "description": "Apply Challenge: Nested Queries with additional complexity.",
+            "starterCode": "-- Intermediate Challenge: Nested Queries practice\n-- Your code here",
+            "solution": "-- More complex Challenge: Nested Queries solution",
+            "hint": "Combine Challenge: Nested Queries with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Challenge: Nested Queries."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Challenge: Nested Queries",
+            "description": "Master advanced Challenge: Nested Queries techniques.",
+            "starterCode": "-- Advanced Challenge: Nested Queries practice\n-- Your advanced query here",
+            "solution": "-- Advanced Challenge: Nested Queries solution",
+            "hint": "Think about edge cases and optimization for Challenge: Nested Queries.",
+            "expectedOutput": "Advanced Challenge: Nested Queries results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Challenge: Nested Queries",
+            "description": "Apply Challenge: Nested Queries to solve a realistic business problem.",
+            "starterCode": "-- Real-world Challenge: Nested Queries scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Challenge: Nested Queries solution",
+            "hint": "Consider how Challenge: Nested Queries would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "challenge-nested-queries_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Challenge: Nested Queries?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Challenge: Nested Queries functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Challenge: Nested Queries functionality",
+            "explanation": "Challenge: Nested Queries is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "challenge-nested-queries_q2",
+            "type": "truefalse",
+            "question": "Challenge: Nested Queries can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Challenge: Nested Queries can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "challenge-nested-queries_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Challenge: Nested Queries?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Challenge: Nested Queries, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "challenge-nested-queries_q4",
+            "type": "truefalse",
+            "question": "Challenge: Nested Queries is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "challenge-nested-queries_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Challenge: Nested Queries?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "challenge-nested-queries_q6",
+            "type": "mcq",
+            "question": "When learning Challenge: Nested Queries, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "challenge-nested-queries_q7",
+            "type": "truefalse",
+            "question": "Understanding Challenge: Nested Queries is important for database professionals.",
+            "answer": true,
+            "explanation": "Challenge: Nested Queries is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "challenge-nested-queries_q8",
+            "type": "mcq",
+            "question": "What should you do before using Challenge: Nested Queries in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

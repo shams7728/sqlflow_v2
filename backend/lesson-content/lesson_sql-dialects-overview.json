@@ -1,0 +1,192 @@
+{
+    "id": "sql-dialects-overview",
+    "title": "SQL Dialects Overview",
+    "category": "Security & Admin",
+    "difficulty": "Intermediate",
+    "estimatedTime": "20 min",
+    "starterQuery": "/* This is a conceptual lesson on the differences between SQL versions. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What is a SQL Dialect?\nWhile SQL is a standard language (defined by ANSI), almost every database management system (DBMS) implements its own version of the language. These different versions are known as 'dialects'. Common dialects include T-SQL (Microsoft SQL Server), PL/pgSQL (PostgreSQL), PL/SQL (Oracle), and the simpler SQL used by MySQL and SQLite."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Why do dialects exist?\nDialects exist because database vendors add their own proprietary extensions and functions to the standard SQL to provide more features or to optimize performance on their specific system. This leads to differences in syntax, data types, and available functions."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. What are some common differences?\nDifferences are common in areas like string concatenation, limiting results, handling NULLs, and advanced features like window functions or stored procedures. Understanding these differences is key to writing portable code or migrating from one database to another."
+        },
+        {
+            "type": "table",
+            "columns": [
+                "Feature",
+                "PostgreSQL / SQLite",
+                "SQL Server (T-SQL)",
+                "MySQL"
+            ],
+            "rows": [
+                [
+                    "String Concatenation",
+                    "|| operator",
+                    "+ operator",
+                    "CONCAT() function"
+                ],
+                [
+                    "Limit Results",
+                    "LIMIT n",
+                    "TOP n",
+                    "LIMIT n"
+                ],
+                [
+                    "Auto-incrementing Key",
+                    "SERIAL or IDENTITY",
+                    "IDENTITY(1,1)",
+                    "AUTO_INCREMENT"
+                ],
+                [
+                    "'If Null' Function",
+                    "COALESCE()",
+                    "ISNULL()",
+                    "IFNULL() or COALESCE()"
+                ]
+            ]
+        },
+        {
+            "type": "note",
+            "text": "The SQL taught in this course is primarily based on the SQLite dialect, which is very close to the ANSI standard for core commands. However, we often show examples from other dialects for advanced, conceptual topics."
+        }
+    ],
+    "schema": {
+        "tables": []
+    },
+    "sample_data": {},
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic SQL Dialects Overview Query",
+            "description": "Practice the fundamental concepts of SQL Dialects Overview.",
+            "starterCode": "-- Practice SQL Dialects Overview\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific SQL Dialects Overview lesson",
+            "hint": "Review the SQL Dialects Overview syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating SQL Dialects Overview functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate SQL Dialects Overview",
+            "description": "Apply SQL Dialects Overview with additional complexity.",
+            "starterCode": "-- Intermediate SQL Dialects Overview practice\n-- Your code here",
+            "solution": "-- More complex SQL Dialects Overview solution",
+            "hint": "Combine SQL Dialects Overview with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using SQL Dialects Overview."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced SQL Dialects Overview",
+            "description": "Master advanced SQL Dialects Overview techniques.",
+            "starterCode": "-- Advanced SQL Dialects Overview practice\n-- Your advanced query here",
+            "solution": "-- Advanced SQL Dialects Overview solution",
+            "hint": "Think about edge cases and optimization for SQL Dialects Overview.",
+            "expectedOutput": "Advanced SQL Dialects Overview results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world SQL Dialects Overview",
+            "description": "Apply SQL Dialects Overview to solve a realistic business problem.",
+            "starterCode": "-- Real-world SQL Dialects Overview scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused SQL Dialects Overview solution",
+            "hint": "Consider how SQL Dialects Overview would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "sql-dialects-overview_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of SQL Dialects Overview?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement SQL Dialects Overview functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement SQL Dialects Overview functionality",
+            "explanation": "SQL Dialects Overview is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "sql-dialects-overview_q2",
+            "type": "truefalse",
+            "question": "SQL Dialects Overview can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including SQL Dialects Overview can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "sql-dialects-overview_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using SQL Dialects Overview?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using SQL Dialects Overview, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "sql-dialects-overview_q4",
+            "type": "truefalse",
+            "question": "SQL Dialects Overview is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "sql-dialects-overview_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with SQL Dialects Overview?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "sql-dialects-overview_q6",
+            "type": "mcq",
+            "question": "When learning SQL Dialects Overview, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "sql-dialects-overview_q7",
+            "type": "truefalse",
+            "question": "Understanding SQL Dialects Overview is important for database professionals.",
+            "answer": true,
+            "explanation": "SQL Dialects Overview is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "sql-dialects-overview_q8",
+            "type": "mcq",
+            "question": "What should you do before using SQL Dialects Overview in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

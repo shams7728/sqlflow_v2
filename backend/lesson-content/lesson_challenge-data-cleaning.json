@@ -1,0 +1,204 @@
+{
+    "id": "challenge-data-cleaning",
+    "title": "Challenge: Data Cleaning",
+    "category": "Challenges",
+    "difficulty": "Advanced",
+    "estimatedTime": "30 min",
+    "starterQuery": "/* This is a conceptual challenge on cleaning and standardizing raw data. */",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. The Business Problem\nYou've been given a raw data extract of new user signups from a legacy system. The data is messy: names have inconsistent spacing, emails are not standardized to lowercase, and some important fields are missing (NULL). Your task is to write a query that cleans this data to produce a standardized, usable report."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. Analyzing the Schema & Data\nYou have one table, `raw_signups`, with the following columns and sample messy data:\n- `id` (INTEGER)\n- `full_name` (TEXT, e.g., '  John Smith  ')\n- `email` (TEXT, e.g., 'John.S@Email.COM')\n- `status` (TEXT, can be NULL)"
+        },
+        {
+            "type": "paragraph",
+            "text": "3. Devising a Cleaning Strategy\nWe need to apply several data cleaning functions to produce a clean output:\n- **Step A (Standardize Text):** Use the `TRIM()` function to remove leading/trailing whitespace from `full_name`. Use the `LOWER()` function to convert all `email` addresses to a consistent lowercase format.\n- **Step B (Handle Missing Data):** The `status` column can be NULL. We want to replace any NULL values with a default status of 'pending'. The `COALESCE()` function is perfect for this.\n- **Step C (Extract Information):** We want to create a new `username` column from the email address (the part before the '@'). We can use `SUBSTR()` and `INSTR()` to find the '@' symbol and extract the preceding text.\n- **Step D (Combine and Select):** Combine all these cleaning functions in a single `SELECT` statement to produce the final, clean report."
+        },
+        {
+            "type": "code",
+            "text": "-- The Final Solution Query:\nSELECT\n    id,\n    TRIM(full_name) AS cleaned_name,\n    LOWER(email) AS standardized_email,\n    -- Extract username from email (before the '@')\n    SUBSTR(email, 1, INSTR(email, '@') - 1) AS username,\n    -- If status is NULL, default to 'pending'\n    COALESCE(status, 'pending') AS status\nFROM\n    raw_signups;"
+        },
+        {
+            "type": "note",
+            "text": "Data cleaning is often the first and most time-consuming step in any data analysis project. Mastering functions like `TRIM`, `LOWER`, `COALESCE`, and string manipulation functions is essential."
+        }
+    ],
+    "schema": {
+        "tables": [
+            {
+                "name": "raw_signups",
+                "columns": [
+                    {
+                        "name": "id",
+                        "type": "INTEGER"
+                    },
+                    {
+                        "name": "full_name",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "email",
+                        "type": "TEXT"
+                    },
+                    {
+                        "name": "status",
+                        "type": "TEXT"
+                    }
+                ]
+            }
+        ]
+    },
+    "sample_data": {
+        "raw_signups": [
+            {
+                "id": 1,
+                "full_name": "  Alice   ",
+                "email": "Alice@Example.COM",
+                "status": "active"
+            },
+            {
+                "id": 2,
+                "full_name": "Bob Smith",
+                "email": "BOB@example.com",
+                "status": null
+            },
+            {
+                "id": 3,
+                "full_name": "  charlie brown",
+                "email": "Charlie.B@Example.COM",
+                "status": "inactive"
+            }
+        ]
+    },
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Challenge: Data Cleaning Query",
+            "description": "Practice the fundamental concepts of Challenge: Data Cleaning.",
+            "starterCode": "-- Practice Challenge: Data Cleaning\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Challenge: Data Cleaning lesson",
+            "hint": "Review the Challenge: Data Cleaning syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Challenge: Data Cleaning functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Challenge: Data Cleaning",
+            "description": "Apply Challenge: Data Cleaning with additional complexity.",
+            "starterCode": "-- Intermediate Challenge: Data Cleaning practice\n-- Your code here",
+            "solution": "-- More complex Challenge: Data Cleaning solution",
+            "hint": "Combine Challenge: Data Cleaning with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Challenge: Data Cleaning."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Challenge: Data Cleaning",
+            "description": "Master advanced Challenge: Data Cleaning techniques.",
+            "starterCode": "-- Advanced Challenge: Data Cleaning practice\n-- Your advanced query here",
+            "solution": "-- Advanced Challenge: Data Cleaning solution",
+            "hint": "Think about edge cases and optimization for Challenge: Data Cleaning.",
+            "expectedOutput": "Advanced Challenge: Data Cleaning results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Challenge: Data Cleaning",
+            "description": "Apply Challenge: Data Cleaning to solve a realistic business problem.",
+            "starterCode": "-- Real-world Challenge: Data Cleaning scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Challenge: Data Cleaning solution",
+            "hint": "Consider how Challenge: Data Cleaning would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "challenges": [],
+    "quiz": [
+        {
+            "id": "challenge-data-cleaning_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Challenge: Data Cleaning?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Challenge: Data Cleaning functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Challenge: Data Cleaning functionality",
+            "explanation": "Challenge: Data Cleaning is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "challenge-data-cleaning_q2",
+            "type": "truefalse",
+            "question": "Challenge: Data Cleaning can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Challenge: Data Cleaning can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "challenge-data-cleaning_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Challenge: Data Cleaning?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Challenge: Data Cleaning, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "challenge-data-cleaning_q4",
+            "type": "truefalse",
+            "question": "Challenge: Data Cleaning is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "challenge-data-cleaning_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Challenge: Data Cleaning?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "challenge-data-cleaning_q6",
+            "type": "mcq",
+            "question": "When learning Challenge: Data Cleaning, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "challenge-data-cleaning_q7",
+            "type": "truefalse",
+            "question": "Understanding Challenge: Data Cleaning is important for database professionals.",
+            "answer": true,
+            "explanation": "Challenge: Data Cleaning is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "challenge-data-cleaning_q8",
+            "type": "mcq",
+            "question": "What should you do before using Challenge: Data Cleaning in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ]
+}

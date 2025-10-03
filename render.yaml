@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: sqlflow-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_URI_LOCAL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FORMSPREE_ENDPOINT
+        sync: false
+      - key: ONESIGNAL_APP_ID
+        sync: false
+      - key: ONESIGNAL_REST_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false

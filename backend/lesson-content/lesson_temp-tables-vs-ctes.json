@@ -1,0 +1,169 @@
+{
+    "id": "temp-tables-vs-ctes",
+    "title": "Temp Tables vs. CTEs",
+    "category": "Advanced Querying",
+    "difficulty": "Advanced",
+    "estimatedTime": "15 min",
+    "starterQuery": "/* This is a conceptual lesson comparing two powerful techniques. */\n\n-- CTE Example:\nWITH SalesSummary AS (\n    SELECT region, SUM(amount) as total_sales\n    FROM sales\n    GROUP BY region\n)\nSELECT * FROM SalesSummary WHERE total_sales > 10000;\n\n-- Temp Table Example (T-SQL Syntax):\nCREATE TABLE #SalesSummary (\n    region TEXT,\n    total_sales INT\n);\nINSERT INTO #SalesSummary\nSELECT region, SUM(amount) FROM sales GROUP BY region;\n\nSELECT * FROM #SalesSummary WHERE total_sales > 10000;",
+    "theory": [
+        {
+            "type": "paragraph",
+            "text": "1. What's the core difference?\nThe main difference is scope and persistence. A Common Table Expression (CTE) exists only for the duration of a single query. A Temporary Table is a physical table that is created in the database (in a special area like tempdb) and persists for the entire session, allowing it to be referenced by multiple subsequent queries."
+        },
+        {
+            "type": "paragraph",
+            "text": "2. When should I use a CTE?\nCTEs are perfect for improving the readability and structure of a single, complex query. They are ideal for one-off calculations and are often used for recursive queries. Since they aren't physically created, they can be more efficient for simple, single-use cases."
+        },
+        {
+            "type": "paragraph",
+            "text": "3. When should I use a Temporary Table?\nTemporary tables are better when you need to reuse an intermediate result set multiple times in a script. If you have a complex data set that you need to filter, join, and aggregate in several different ways, creating a temp table once at the beginning is much more efficient than re-calculating the same CTE over and over."
+        },
+        {
+            "type": "paragraph",
+            "text": "4. What about performance?\nFor a single, straightforward query, a CTE is usually faster. For complex scripts where the same intermediate data is needed multiple times, a temp table is almost always better because the data is 'materialized' (physically stored), can be indexed, and doesn't need to be re-calculated."
+        }
+    ],
+    "schema": {
+        "tables": []
+    },
+    "sample_data": {},
+    "practice": [
+        {
+            "id": "practice_1",
+            "title": "Basic Temp Tables vs. CTEs Query",
+            "description": "Practice the fundamental concepts of Temp Tables vs. CTEs.",
+            "starterCode": "-- Practice Temp Tables vs. CTEs\n-- Write your query here",
+            "solution": "-- Solution will depend on the specific Temp Tables vs. CTEs lesson",
+            "hint": "Review the Temp Tables vs. CTEs syntax and examples from the theory section.",
+            "expectedOutput": "Results demonstrating Temp Tables vs. CTEs functionality."
+        },
+        {
+            "id": "practice_2",
+            "title": "Intermediate Temp Tables vs. CTEs",
+            "description": "Apply Temp Tables vs. CTEs with additional complexity.",
+            "starterCode": "-- Intermediate Temp Tables vs. CTEs practice\n-- Your code here",
+            "solution": "-- More complex Temp Tables vs. CTEs solution",
+            "hint": "Combine Temp Tables vs. CTEs with other SQL concepts you've learned.",
+            "expectedOutput": "More complex results using Temp Tables vs. CTEs."
+        },
+        {
+            "id": "practice_3",
+            "title": "Advanced Temp Tables vs. CTEs",
+            "description": "Master advanced Temp Tables vs. CTEs techniques.",
+            "starterCode": "-- Advanced Temp Tables vs. CTEs practice\n-- Your advanced query here",
+            "solution": "-- Advanced Temp Tables vs. CTEs solution",
+            "hint": "Think about edge cases and optimization for Temp Tables vs. CTEs.",
+            "expectedOutput": "Advanced Temp Tables vs. CTEs results with optimized performance."
+        },
+        {
+            "id": "practice_4",
+            "title": "Real-world Temp Tables vs. CTEs",
+            "description": "Apply Temp Tables vs. CTEs to solve a realistic business problem.",
+            "starterCode": "-- Real-world Temp Tables vs. CTEs scenario\n-- Solve the business problem",
+            "solution": "-- Business-focused Temp Tables vs. CTEs solution",
+            "hint": "Consider how Temp Tables vs. CTEs would be used in actual database applications.",
+            "expectedOutput": "Practical results that solve real business needs."
+        }
+    ],
+    "quiz": [
+        {
+            "id": "temp-tables-vs-ctes_q1",
+            "type": "mcq",
+            "question": "What is the primary purpose of Temp Tables vs. CTEs?",
+            "options": [
+                "To modify table structure",
+                "To query data from tables",
+                "To implement Temp Tables vs. CTEs functionality",
+                "To create database backups"
+            ],
+            "answer": "To implement Temp Tables vs. CTEs functionality",
+            "explanation": "Temp Tables vs. CTEs is specifically designed to handle its particular SQL functionality as described in the lesson."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q2",
+            "type": "truefalse",
+            "question": "Temp Tables vs. CTEs can be used with other SQL clauses and commands.",
+            "answer": true,
+            "explanation": "Most SQL commands including Temp Tables vs. CTEs can be combined with other clauses to create more powerful and specific queries."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q3",
+            "type": "mcq",
+            "question": "Which of the following is a key consideration when using Temp Tables vs. CTEs?",
+            "options": [
+                "Performance impact",
+                "Data accuracy",
+                "Syntax correctness",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "When using Temp Tables vs. CTEs, you should always consider performance, data accuracy, and correct syntax to ensure optimal results."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q4",
+            "type": "truefalse",
+            "question": "Temp Tables vs. CTEs is supported by all SQL database systems.",
+            "answer": false,
+            "explanation": "Different SQL database systems may have variations in syntax and support for various SQL features. Always check your specific database documentation."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q5",
+            "type": "mcq",
+            "question": "What happens if you use incorrect syntax with Temp Tables vs. CTEs?",
+            "options": [
+                "The query runs with default values",
+                "The database crashes",
+                "You get a syntax error",
+                "The query is automatically corrected"
+            ],
+            "answer": "You get a syntax error",
+            "explanation": "SQL databases will return syntax errors when commands are not properly formatted, helping you identify and fix issues."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q6",
+            "type": "mcq",
+            "question": "When learning Temp Tables vs. CTEs, what is the best practice?",
+            "options": [
+                "Memorize all syntax variations",
+                "Practice with real examples",
+                "Only read the documentation",
+                "Skip the fundamentals"
+            ],
+            "answer": "Practice with real examples",
+            "explanation": "Hands-on practice with real examples is the most effective way to master SQL concepts and build practical skills."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q7",
+            "type": "truefalse",
+            "question": "Understanding Temp Tables vs. CTEs is important for database professionals.",
+            "answer": true,
+            "explanation": "Temp Tables vs. CTEs is a fundamental SQL concept that database professionals should understand to work effectively with databases."
+        },
+        {
+            "id": "temp-tables-vs-ctes_q8",
+            "type": "mcq",
+            "question": "What should you do before using Temp Tables vs. CTEs in a production environment?",
+            "options": [
+                "Test it thoroughly",
+                "Read the documentation",
+                "Understand the impact",
+                "All of the above"
+            ],
+            "answer": "All of the above",
+            "explanation": "Before using any SQL command in production, you should test thoroughly, read documentation, and understand the potential impact on your system."
+        }
+    ],
+    "challenges": [
+        {
+            "id": "ttvcte_ch1",
+            "title": "Scenario: Daily Report",
+            "steps": [
+                {
+                    "stepId": "ttvcte_ch1_step1",
+                    "description": "You are writing a script that first calculates daily user activity, then calculates weekly trends from that daily data, and finally calculates monthly trends from the same daily data. Should you use a CTE or a Temp Table to hold the initial daily activity data?",
+                    "solution": "A Temporary Table. Because the daily activity data is calculated once and then used by two subsequent queries (weekly and monthly trends), a temp table is more efficient."
+                }
+            ]
+        }
+    ]
+}
